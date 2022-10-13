@@ -82,6 +82,14 @@ class sop_trans_mat_loss(nn.Module):
         with torch.no_grad():
             return (torch.zeros(len(x), self.num_classes)).cuda().scatter_(1, (x.argmax(dim=1)).view(-1, 1), 1)
 
+    def consistency_loss(self, index, output1, output2):
+        preds1 = F.softmax(output1, dim=1).detach()
+        preds2 = F.log_softmax(output2, dim=1)
+        loss_kldiv = F.kl_div(preds2, preds1, reduction='none')
+        loss_kldiv = torch.sum(loss_kldiv, dim=1)
+        return loss_kldiv
+
+
 class sop_trans_loss(nn.Module):
     def __init__(self, num_examp, num_classes=10, Tr=0, ratio_balance=0):
         super(sop_trans_loss, self).__init__()

@@ -1,0 +1,21 @@
+Namespace(T=0.5, alpha=4, batch_size=256, cosine=True, data_path='../data/cifar-100-python', dataset='cifar100', fmix=False, gpuid=0, id='', is_human=False, low_conf_del=False, lr=0.02, lr_decay_rate=0.1, noise_path='../data/cifar100N/CIFAR-100_human.pt', noise_type='noisy100', num_class=100, num_epochs=200, p_threshold=0.5, pretrain_ep=20, proto_m=0.9, rho_end=0.5, rho_range='0.5,0.5', rho_start=0.5, save_note='', seed=123, start_expand=150, tau=0.95, threshold=0.9, topk=4, unrel_pseudo='sharpen', use_unrel=False, warmup_ep=50)
+| Building net
+Loaded noisy_label from ../data/cifar100N/CIFAR-100_human.pt.
+The overall noise rate is 0.402
+noisy labels loaded from ../data/cifar100N/CIFAR-100_human.pt
+The noisy data ratio in each class is [0.1107883  0.11834205 0.09374395 0.13190006 0.05791207 0.09141972
+ 0.08541546 0.11601782 0.08522177 0.10923881]
+over all noise rate is  0.402
+Warmup Net1
+Traceback (most recent call last):
+  File "sopmix.py", line 394, in <module>
+    warmup(epoch, net1, ema_net, optimizer1, warmup_trainloader)
+  File "sopmix.py", line 216, in warmup
+    loss = train_loss(index, outputs, outputs2, labels_x, labels)
+  File "/opt/conda/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/workspace/robust_respo/losses.py", line 74, in forward
+    consistency_loss = self.consistency_loss(index, output, output2)
+  File "/opt/conda/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1178, in __getattr__
+    type(self).__name__, name))
+AttributeError: 'sop_trans_mat_loss' object has no attribute 'consistency_loss'
