@@ -97,7 +97,7 @@ class sop_trans_loss(nn.Module):
         self.USE_CUDA = torch.cuda.is_available()
         self.num_examp = num_examp
         self.Tr = Tr
-        self.ratio_consistency = 0.9
+        self.ratio_consistency = 0.2
         self.ratio_balance = ratio_balance
 
         self.u = nn.Parameter(torch.empty(num_examp, 1, dtype=torch.float32))
@@ -160,7 +160,7 @@ class sop_trans_loss(nn.Module):
 
             loss += self.ratio_consistency * torch.mean(consistency_loss)
 
-        return loss
+        return loss, prediction
 
 
     def soft_to_hard(self, x):
