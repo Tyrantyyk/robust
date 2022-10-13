@@ -1,0 +1,631 @@
+Namespace(T=0.5, alpha=4, batch_size=256, cosine=True, data_path='../data/cifar-100-python', dataset='cifar100', fmix=False, gpuid=0, id='', is_human=False, low_conf_del=False, lr=0.02, lr_decay_rate=0.1, noise_path='../data/cifar100N/CIFAR-100_human.pt', noise_type='noisy100', num_class=100, num_epochs=200, p_threshold=0.5, pretrain_ep=20, proto_m=0.9, rho_end=0.5, rho_range='0.5,0.5', rho_start=0.5, save_note='', seed=123, start_expand=150, tau=0.95, threshold=0.9, topk=4, unrel_pseudo='sharpen', use_unrel=False, warmup_ep=50)
+| Building net
+Loaded noisy_label from ../data/cifar100N/CIFAR-100_human.pt.
+The overall noise rate is 0.402
+noisy labels loaded from ../data/cifar100N/CIFAR-100_human.pt
+The noisy data ratio in each class is [0.1107883  0.11834205 0.09374395 0.13190006 0.05791207 0.09141972
+ 0.08541546 0.11601782 0.08522177 0.10923881]
+over all noise rate is  0.402
+Warmup Net1
+cifar100:noisy_label | Epoch [  0/200] Iter[  1/196]	 CE-loss: 7.1854  Penalty-loss: -4.5563  All-loss: 2.6291
+cifar100:noisy_label | Epoch [  0/200] Iter[101/196]	 CE-loss: 6.5723  Penalty-loss: -4.5999  All-loss: 1.9724
+| Test Epoch #0	 Acc Net1: 11.55%, Acc Net2: 1.20% Acc Mean: 11.86%
+Warmup Net1
+cifar100:noisy_label | Epoch [  1/200] Iter[  1/196]	 CE-loss: 6.4356  Penalty-loss: -4.6029  All-loss: 1.8327
+cifar100:noisy_label | Epoch [  1/200] Iter[101/196]	 CE-loss: 5.8741  Penalty-loss: -4.6015  All-loss: 1.2725
+| Test Epoch #1	 Acc Net1: 18.93%, Acc Net2: 3.46% Acc Mean: 19.42%
+Warmup Net1
+cifar100:noisy_label | Epoch [  2/200] Iter[  1/196]	 CE-loss: 6.3689  Penalty-loss: -4.6041  All-loss: 1.7648
+cifar100:noisy_label | Epoch [  2/200] Iter[101/196]	 CE-loss: 5.8394  Penalty-loss: -4.6042  All-loss: 1.2352
+| Test Epoch #2	 Acc Net1: 22.68%, Acc Net2: 5.70% Acc Mean: 22.38%
+Warmup Net1
+cifar100:noisy_label | Epoch [  3/200] Iter[  1/196]	 CE-loss: 5.7148  Penalty-loss: -4.6021  All-loss: 1.1127
+cifar100:noisy_label | Epoch [  3/200] Iter[101/196]	 CE-loss: 5.9399  Penalty-loss: -4.6009  All-loss: 1.3390
+| Test Epoch #3	 Acc Net1: 28.77%, Acc Net2: 10.01% Acc Mean: 28.53%
+Warmup Net1
+cifar100:noisy_label | Epoch [  4/200] Iter[  1/196]	 CE-loss: 5.3279  Penalty-loss: -4.6031  All-loss: 0.7248
+cifar100:noisy_label | Epoch [  4/200] Iter[101/196]	 CE-loss: 5.4559  Penalty-loss: -4.6023  All-loss: 0.8536
+| Test Epoch #4	 Acc Net1: 31.19%, Acc Net2: 15.03% Acc Mean: 31.67%
+Warmup Net1
+cifar100:noisy_label | Epoch [  5/200] Iter[  1/196]	 CE-loss: 5.5710  Penalty-loss: -4.6011  All-loss: 0.9699
+cifar100:noisy_label | Epoch [  5/200] Iter[101/196]	 CE-loss: 5.3409  Penalty-loss: -4.5987  All-loss: 0.7421
+| Test Epoch #5	 Acc Net1: 36.64%, Acc Net2: 19.89% Acc Mean: 37.20%
+Warmup Net1
+cifar100:noisy_label | Epoch [  6/200] Iter[  1/196]	 CE-loss: 4.9160  Penalty-loss: -4.6019  All-loss: 0.3141
+cifar100:noisy_label | Epoch [  6/200] Iter[101/196]	 CE-loss: 4.9497  Penalty-loss: -4.6008  All-loss: 0.3490
+| Test Epoch #6	 Acc Net1: 38.01%, Acc Net2: 24.08% Acc Mean: 39.45%
+Warmup Net1
+cifar100:noisy_label | Epoch [  7/200] Iter[  1/196]	 CE-loss: 4.7669  Penalty-loss: -4.6034  All-loss: 0.1635
+cifar100:noisy_label | Epoch [  7/200] Iter[101/196]	 CE-loss: 5.0348  Penalty-loss: -4.6040  All-loss: 0.4308
+| Test Epoch #7	 Acc Net1: 40.20%, Acc Net2: 28.63% Acc Mean: 40.67%
+Warmup Net1
+cifar100:noisy_label | Epoch [  8/200] Iter[  1/196]	 CE-loss: 4.6079  Penalty-loss: -4.5981  All-loss: 0.0098
+cifar100:noisy_label | Epoch [  8/200] Iter[101/196]	 CE-loss: 4.6967  Penalty-loss: -4.6008  All-loss: 0.0958
+| Test Epoch #8	 Acc Net1: 42.60%, Acc Net2: 32.87% Acc Mean: 43.46%
+Warmup Net1
+cifar100:noisy_label | Epoch [  9/200] Iter[  1/196]	 CE-loss: 4.6862  Penalty-loss: -4.6036  All-loss: 0.0826
+cifar100:noisy_label | Epoch [  9/200] Iter[101/196]	 CE-loss: 4.7198  Penalty-loss: -4.5990  All-loss: 0.1208
+| Test Epoch #9	 Acc Net1: 45.64%, Acc Net2: 36.92% Acc Mean: 46.50%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 10/200] Iter[  1/196]	 CE-loss: 4.5365  Penalty-loss: -4.6028  All-loss: -0.0663
+cifar100:noisy_label | Epoch [ 10/200] Iter[101/196]	 CE-loss: 4.6629  Penalty-loss: -4.6024  All-loss: 0.0605
+| Test Epoch #10	 Acc Net1: 45.52%, Acc Net2: 40.22% Acc Mean: 46.83%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 11/200] Iter[  1/196]	 CE-loss: 4.4037  Penalty-loss: -4.6033  All-loss: -0.1997
+cifar100:noisy_label | Epoch [ 11/200] Iter[101/196]	 CE-loss: 4.5196  Penalty-loss: -4.6029  All-loss: -0.0833
+| Test Epoch #11	 Acc Net1: 47.32%, Acc Net2: 43.28% Acc Mean: 49.05%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 12/200] Iter[  1/196]	 CE-loss: 4.3703  Penalty-loss: -4.6043  All-loss: -0.2340
+cifar100:noisy_label | Epoch [ 12/200] Iter[101/196]	 CE-loss: 4.4351  Penalty-loss: -4.6036  All-loss: -0.1685
+| Test Epoch #12	 Acc Net1: 47.38%, Acc Net2: 45.41% Acc Mean: 50.07%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 13/200] Iter[  1/196]	 CE-loss: 4.2195  Penalty-loss: -4.6031  All-loss: -0.3836
+cifar100:noisy_label | Epoch [ 13/200] Iter[101/196]	 CE-loss: 4.4016  Penalty-loss: -4.6016  All-loss: -0.2000
+| Test Epoch #13	 Acc Net1: 48.83%, Acc Net2: 47.50% Acc Mean: 50.85%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 14/200] Iter[  1/196]	 CE-loss: 4.3179  Penalty-loss: -4.6024  All-loss: -0.2845
+cifar100:noisy_label | Epoch [ 14/200] Iter[101/196]	 CE-loss: 4.0603  Penalty-loss: -4.6039  All-loss: -0.5436
+| Test Epoch #14	 Acc Net1: 49.35%, Acc Net2: 49.10% Acc Mean: 52.29%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 15/200] Iter[  1/196]	 CE-loss: 4.1375  Penalty-loss: -4.6029  All-loss: -0.4654
+cifar100:noisy_label | Epoch [ 15/200] Iter[101/196]	 CE-loss: 4.1892  Penalty-loss: -4.5997  All-loss: -0.4105
+| Test Epoch #15	 Acc Net1: 50.96%, Acc Net2: 50.81% Acc Mean: 53.49%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 16/200] Iter[  1/196]	 CE-loss: 4.0164  Penalty-loss: -4.6028  All-loss: -0.5864
+cifar100:noisy_label | Epoch [ 16/200] Iter[101/196]	 CE-loss: 4.3321  Penalty-loss: -4.6020  All-loss: -0.2699
+| Test Epoch #16	 Acc Net1: 50.04%, Acc Net2: 52.35% Acc Mean: 54.07%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 17/200] Iter[  1/196]	 CE-loss: 3.9973  Penalty-loss: -4.6035  All-loss: -0.6062
+cifar100:noisy_label | Epoch [ 17/200] Iter[101/196]	 CE-loss: 4.0554  Penalty-loss: -4.6020  All-loss: -0.5466
+| Test Epoch #17	 Acc Net1: 50.98%, Acc Net2: 53.45% Acc Mean: 54.58%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 18/200] Iter[  1/196]	 CE-loss: 3.8425  Penalty-loss: -4.6014  All-loss: -0.7588
+cifar100:noisy_label | Epoch [ 18/200] Iter[101/196]	 CE-loss: 4.0324  Penalty-loss: -4.6029  All-loss: -0.5705
+| Test Epoch #18	 Acc Net1: 52.86%, Acc Net2: 54.63% Acc Mean: 55.69%
+Warmup Net1
+cifar100:noisy_label | Epoch [ 19/200] Iter[  1/196]	 CE-loss: 3.7357  Penalty-loss: -4.6034  All-loss: -0.8677
+cifar100:noisy_label | Epoch [ 19/200] Iter[101/196]	 CE-loss: 4.0311  Penalty-loss: -4.6013  All-loss: -0.5702
+| Test Epoch #19	 Acc Net1: 52.91%, Acc Net2: 55.71% Acc Mean: 56.39%
+cifar100:noisy_label | Epoch [ 20/200] Iter[  1/196]	 Net1 loss: 2.18
+cifar100:noisy_label | Epoch [ 20/200] Iter[101/196]	 Net1 loss: 2.52
+| Test Epoch #20	 Acc Net1: 53.88%, Acc Net2: 56.93% Acc Mean: 57.51%
+cifar100:noisy_label | Epoch [ 21/200] Iter[  1/196]	 Net1 loss: 2.43
+cifar100:noisy_label | Epoch [ 21/200] Iter[101/196]	 Net1 loss: 2.27
+| Test Epoch #21	 Acc Net1: 54.18%, Acc Net2: 57.69% Acc Mean: 58.24%
+cifar100:noisy_label | Epoch [ 22/200] Iter[  1/196]	 Net1 loss: 2.10
+cifar100:noisy_label | Epoch [ 22/200] Iter[101/196]	 Net1 loss: 2.34
+| Test Epoch #22	 Acc Net1: 55.91%, Acc Net2: 58.70% Acc Mean: 59.29%
+cifar100:noisy_label | Epoch [ 23/200] Iter[  1/196]	 Net1 loss: 2.87
+cifar100:noisy_label | Epoch [ 23/200] Iter[101/196]	 Net1 loss: 2.57
+| Test Epoch #23	 Acc Net1: 54.79%, Acc Net2: 59.48% Acc Mean: 59.51%
+cifar100:noisy_label | Epoch [ 24/200] Iter[  1/196]	 Net1 loss: 1.73
+cifar100:noisy_label | Epoch [ 24/200] Iter[101/196]	 Net1 loss: 2.75
+| Test Epoch #24	 Acc Net1: 56.58%, Acc Net2: 60.17% Acc Mean: 59.93%
+cifar100:noisy_label | Epoch [ 25/200] Iter[  1/196]	 Net1 loss: 2.87
+cifar100:noisy_label | Epoch [ 25/200] Iter[101/196]	 Net1 loss: 3.01
+| Test Epoch #25	 Acc Net1: 56.47%, Acc Net2: 60.71% Acc Mean: 60.15%
+cifar100:noisy_label | Epoch [ 26/200] Iter[  1/196]	 Net1 loss: 1.99
+cifar100:noisy_label | Epoch [ 26/200] Iter[101/196]	 Net1 loss: 2.88
+| Test Epoch #26	 Acc Net1: 56.72%, Acc Net2: 61.26% Acc Mean: 60.86%
+cifar100:noisy_label | Epoch [ 27/200] Iter[  1/196]	 Net1 loss: 3.19
+cifar100:noisy_label | Epoch [ 27/200] Iter[101/196]	 Net1 loss: 3.21
+| Test Epoch #27	 Acc Net1: 57.75%, Acc Net2: 61.49% Acc Mean: 61.58%
+cifar100:noisy_label | Epoch [ 28/200] Iter[  1/196]	 Net1 loss: 3.24
+cifar100:noisy_label | Epoch [ 28/200] Iter[101/196]	 Net1 loss: 3.39
+| Test Epoch #28	 Acc Net1: 57.20%, Acc Net2: 61.81% Acc Mean: 61.47%
+cifar100:noisy_label | Epoch [ 29/200] Iter[  1/196]	 Net1 loss: 3.17
+cifar100:noisy_label | Epoch [ 29/200] Iter[101/196]	 Net1 loss: 2.78
+| Test Epoch #29	 Acc Net1: 57.70%, Acc Net2: 62.10% Acc Mean: 61.50%
+cifar100:noisy_label | Epoch [ 30/200] Iter[  1/196]	 Net1 loss: 3.48
+cifar100:noisy_label | Epoch [ 30/200] Iter[101/196]	 Net1 loss: 3.38
+| Test Epoch #30	 Acc Net1: 59.79%, Acc Net2: 62.59% Acc Mean: 62.65%
+cifar100:noisy_label | Epoch [ 31/200] Iter[  1/196]	 Net1 loss: 3.10
+cifar100:noisy_label | Epoch [ 31/200] Iter[101/196]	 Net1 loss: 3.04
+| Test Epoch #31	 Acc Net1: 59.96%, Acc Net2: 62.90% Acc Mean: 62.76%
+cifar100:noisy_label | Epoch [ 32/200] Iter[  1/196]	 Net1 loss: 2.96
+cifar100:noisy_label | Epoch [ 32/200] Iter[101/196]	 Net1 loss: 3.15
+| Test Epoch #32	 Acc Net1: 58.37%, Acc Net2: 63.34% Acc Mean: 62.58%
+cifar100:noisy_label | Epoch [ 33/200] Iter[  1/196]	 Net1 loss: 2.19
+cifar100:noisy_label | Epoch [ 33/200] Iter[101/196]	 Net1 loss: 2.24
+| Test Epoch #33	 Acc Net1: 59.87%, Acc Net2: 63.67% Acc Mean: 62.98%
+cifar100:noisy_label | Epoch [ 34/200] Iter[  1/196]	 Net1 loss: 3.58
+cifar100:noisy_label | Epoch [ 34/200] Iter[101/196]	 Net1 loss: 3.58
+| Test Epoch #34	 Acc Net1: 60.91%, Acc Net2: 64.10% Acc Mean: 64.03%
+cifar100:noisy_label | Epoch [ 35/200] Iter[  1/196]	 Net1 loss: 2.15
+cifar100:noisy_label | Epoch [ 35/200] Iter[101/196]	 Net1 loss: 3.67
+| Test Epoch #35	 Acc Net1: 59.64%, Acc Net2: 64.41% Acc Mean: 63.43%
+cifar100:noisy_label | Epoch [ 36/200] Iter[  1/196]	 Net1 loss: 3.77
+cifar100:noisy_label | Epoch [ 36/200] Iter[101/196]	 Net1 loss: 4.10
+| Test Epoch #36	 Acc Net1: 60.14%, Acc Net2: 64.47% Acc Mean: 63.74%
+cifar100:noisy_label | Epoch [ 37/200] Iter[  1/196]	 Net1 loss: 4.09
+cifar100:noisy_label | Epoch [ 37/200] Iter[101/196]	 Net1 loss: 3.86
+| Test Epoch #37	 Acc Net1: 59.40%, Acc Net2: 64.70% Acc Mean: 63.18%
+cifar100:noisy_label | Epoch [ 38/200] Iter[  1/196]	 Net1 loss: 3.95
+cifar100:noisy_label | Epoch [ 38/200] Iter[101/196]	 Net1 loss: 3.53
+| Test Epoch #38	 Acc Net1: 59.51%, Acc Net2: 64.73% Acc Mean: 63.31%
+cifar100:noisy_label | Epoch [ 39/200] Iter[  1/196]	 Net1 loss: 4.36
+cifar100:noisy_label | Epoch [ 39/200] Iter[101/196]	 Net1 loss: 2.92
+| Test Epoch #39	 Acc Net1: 59.98%, Acc Net2: 64.87% Acc Mean: 64.00%
+cifar100:noisy_label | Epoch [ 40/200] Iter[  1/196]	 Net1 loss: 4.25
+cifar100:noisy_label | Epoch [ 40/200] Iter[101/196]	 Net1 loss: 3.80
+| Test Epoch #40	 Acc Net1: 60.92%, Acc Net2: 65.00% Acc Mean: 64.34%
+cifar100:noisy_label | Epoch [ 41/200] Iter[  1/196]	 Net1 loss: 3.99
+cifar100:noisy_label | Epoch [ 41/200] Iter[101/196]	 Net1 loss: 4.22
+| Test Epoch #41	 Acc Net1: 59.65%, Acc Net2: 65.39% Acc Mean: 63.70%
+cifar100:noisy_label | Epoch [ 42/200] Iter[  1/196]	 Net1 loss: 4.40
+cifar100:noisy_label | Epoch [ 42/200] Iter[101/196]	 Net1 loss: 3.95
+| Test Epoch #42	 Acc Net1: 60.37%, Acc Net2: 65.51% Acc Mean: 64.35%
+cifar100:noisy_label | Epoch [ 43/200] Iter[  1/196]	 Net1 loss: 3.23
+cifar100:noisy_label | Epoch [ 43/200] Iter[101/196]	 Net1 loss: 2.89
+| Test Epoch #43	 Acc Net1: 60.48%, Acc Net2: 65.53% Acc Mean: 64.57%
+cifar100:noisy_label | Epoch [ 44/200] Iter[  1/196]	 Net1 loss: 4.73
+cifar100:noisy_label | Epoch [ 44/200] Iter[101/196]	 Net1 loss: 3.96
+| Test Epoch #44	 Acc Net1: 60.12%, Acc Net2: 65.55% Acc Mean: 64.41%
+cifar100:noisy_label | Epoch [ 45/200] Iter[  1/196]	 Net1 loss: 2.95
+cifar100:noisy_label | Epoch [ 45/200] Iter[101/196]	 Net1 loss: 5.00
+| Test Epoch #45	 Acc Net1: 59.62%, Acc Net2: 65.66% Acc Mean: 63.91%
+cifar100:noisy_label | Epoch [ 46/200] Iter[  1/196]	 Net1 loss: 4.50
+cifar100:noisy_label | Epoch [ 46/200] Iter[101/196]	 Net1 loss: 4.17
+| Test Epoch #46	 Acc Net1: 60.46%, Acc Net2: 65.69% Acc Mean: 64.78%
+cifar100:noisy_label | Epoch [ 47/200] Iter[  1/196]	 Net1 loss: 4.04
+cifar100:noisy_label | Epoch [ 47/200] Iter[101/196]	 Net1 loss: 3.02
+| Test Epoch #47	 Acc Net1: 60.34%, Acc Net2: 65.83% Acc Mean: 64.79%
+cifar100:noisy_label | Epoch [ 48/200] Iter[  1/196]	 Net1 loss: 5.19
+cifar100:noisy_label | Epoch [ 48/200] Iter[101/196]	 Net1 loss: 3.69
+| Test Epoch #48	 Acc Net1: 61.18%, Acc Net2: 65.95% Acc Mean: 64.86%
+cifar100:noisy_label | Epoch [ 49/200] Iter[  1/196]	 Net1 loss: 3.84
+cifar100:noisy_label | Epoch [ 49/200] Iter[101/196]	 Net1 loss: 5.14
+| Test Epoch #49	 Acc Net1: 60.71%, Acc Net2: 65.96% Acc Mean: 64.88%
+cifar100:noisy_label | Epoch [ 50/200] Iter[  1/196]	 Net1 loss: 4.34
+cifar100:noisy_label | Epoch [ 50/200] Iter[101/196]	 Net1 loss: 5.43
+| Test Epoch #50	 Acc Net1: 60.07%, Acc Net2: 65.96% Acc Mean: 65.02%
+cifar100:noisy_label | Epoch [ 51/200] Iter[  1/196]	 Net1 loss: 4.96
+cifar100:noisy_label | Epoch [ 51/200] Iter[101/196]	 Net1 loss: 4.51
+| Test Epoch #51	 Acc Net1: 60.23%, Acc Net2: 65.96% Acc Mean: 64.63%
+cifar100:noisy_label | Epoch [ 52/200] Iter[  1/196]	 Net1 loss: 5.09
+cifar100:noisy_label | Epoch [ 52/200] Iter[101/196]	 Net1 loss: 4.72
+| Test Epoch #52	 Acc Net1: 59.81%, Acc Net2: 65.96% Acc Mean: 64.38%
+cifar100:noisy_label | Epoch [ 53/200] Iter[  1/196]	 Net1 loss: 2.85
+cifar100:noisy_label | Epoch [ 53/200] Iter[101/196]	 Net1 loss: 5.26
+| Test Epoch #53	 Acc Net1: 59.74%, Acc Net2: 65.96% Acc Mean: 64.78%
+cifar100:noisy_label | Epoch [ 54/200] Iter[  1/196]	 Net1 loss: 5.47
+cifar100:noisy_label | Epoch [ 54/200] Iter[101/196]	 Net1 loss: 5.28
+| Test Epoch #54	 Acc Net1: 60.47%, Acc Net2: 65.96% Acc Mean: 65.13%
+cifar100:noisy_label | Epoch [ 55/200] Iter[  1/196]	 Net1 loss: 5.43
+cifar100:noisy_label | Epoch [ 55/200] Iter[101/196]	 Net1 loss: 5.31
+| Test Epoch #55	 Acc Net1: 59.69%, Acc Net2: 65.96% Acc Mean: 64.66%
+cifar100:noisy_label | Epoch [ 56/200] Iter[  1/196]	 Net1 loss: 2.41
+cifar100:noisy_label | Epoch [ 56/200] Iter[101/196]	 Net1 loss: 4.98
+| Test Epoch #56	 Acc Net1: 59.12%, Acc Net2: 65.96% Acc Mean: 64.68%
+cifar100:noisy_label | Epoch [ 57/200] Iter[  1/196]	 Net1 loss: 5.54
+cifar100:noisy_label | Epoch [ 57/200] Iter[101/196]	 Net1 loss: 5.40
+| Test Epoch #57	 Acc Net1: 60.06%, Acc Net2: 65.96% Acc Mean: 64.57%
+cifar100:noisy_label | Epoch [ 58/200] Iter[  1/196]	 Net1 loss: 5.03
+cifar100:noisy_label | Epoch [ 58/200] Iter[101/196]	 Net1 loss: 5.10
+| Test Epoch #58	 Acc Net1: 60.39%, Acc Net2: 65.96% Acc Mean: 65.15%
+cifar100:noisy_label | Epoch [ 59/200] Iter[  1/196]	 Net1 loss: 3.83
+cifar100:noisy_label | Epoch [ 59/200] Iter[101/196]	 Net1 loss: 5.17
+| Test Epoch #59	 Acc Net1: 59.89%, Acc Net2: 65.96% Acc Mean: 64.86%
+cifar100:noisy_label | Epoch [ 60/200] Iter[  1/196]	 Net1 loss: 3.88
+cifar100:noisy_label | Epoch [ 60/200] Iter[101/196]	 Net1 loss: 5.09
+| Test Epoch #60	 Acc Net1: 60.96%, Acc Net2: 65.96% Acc Mean: 64.97%
+cifar100:noisy_label | Epoch [ 61/200] Iter[  1/196]	 Net1 loss: 4.54
+cifar100:noisy_label | Epoch [ 61/200] Iter[101/196]	 Net1 loss: 4.31
+| Test Epoch #61	 Acc Net1: 60.74%, Acc Net2: 65.96% Acc Mean: 65.71%
+cifar100:noisy_label | Epoch [ 62/200] Iter[  1/196]	 Net1 loss: 5.50
+cifar100:noisy_label | Epoch [ 62/200] Iter[101/196]	 Net1 loss: 4.89
+| Test Epoch #62	 Acc Net1: 60.22%, Acc Net2: 65.96% Acc Mean: 64.98%
+cifar100:noisy_label | Epoch [ 63/200] Iter[  1/196]	 Net1 loss: 4.90
+cifar100:noisy_label | Epoch [ 63/200] Iter[101/196]	 Net1 loss: 3.51
+| Test Epoch #63	 Acc Net1: 60.68%, Acc Net2: 65.96% Acc Mean: 65.31%
+cifar100:noisy_label | Epoch [ 64/200] Iter[  1/196]	 Net1 loss: 4.51
+cifar100:noisy_label | Epoch [ 64/200] Iter[101/196]	 Net1 loss: 3.15
+| Test Epoch #64	 Acc Net1: 59.84%, Acc Net2: 65.96% Acc Mean: 64.96%
+cifar100:noisy_label | Epoch [ 65/200] Iter[  1/196]	 Net1 loss: 4.65
+cifar100:noisy_label | Epoch [ 65/200] Iter[101/196]	 Net1 loss: 4.01
+| Test Epoch #65	 Acc Net1: 59.61%, Acc Net2: 65.96% Acc Mean: 64.78%
+cifar100:noisy_label | Epoch [ 66/200] Iter[  1/196]	 Net1 loss: 3.31
+cifar100:noisy_label | Epoch [ 66/200] Iter[101/196]	 Net1 loss: 4.30
+| Test Epoch #66	 Acc Net1: 60.03%, Acc Net2: 65.96% Acc Mean: 64.66%
+cifar100:noisy_label | Epoch [ 67/200] Iter[  1/196]	 Net1 loss: 3.46
+cifar100:noisy_label | Epoch [ 67/200] Iter[101/196]	 Net1 loss: 4.48
+| Test Epoch #67	 Acc Net1: 59.82%, Acc Net2: 65.96% Acc Mean: 64.55%
+cifar100:noisy_label | Epoch [ 68/200] Iter[  1/196]	 Net1 loss: 5.34
+cifar100:noisy_label | Epoch [ 68/200] Iter[101/196]	 Net1 loss: 3.02
+| Test Epoch #68	 Acc Net1: 59.44%, Acc Net2: 65.96% Acc Mean: 65.24%
+cifar100:noisy_label | Epoch [ 69/200] Iter[  1/196]	 Net1 loss: 5.05
+cifar100:noisy_label | Epoch [ 69/200] Iter[101/196]	 Net1 loss: 4.36
+| Test Epoch #69	 Acc Net1: 59.59%, Acc Net2: 65.96% Acc Mean: 65.05%
+cifar100:noisy_label | Epoch [ 70/200] Iter[  1/196]	 Net1 loss: 4.60
+cifar100:noisy_label | Epoch [ 70/200] Iter[101/196]	 Net1 loss: 4.80
+| Test Epoch #70	 Acc Net1: 59.74%, Acc Net2: 65.96% Acc Mean: 64.55%
+cifar100:noisy_label | Epoch [ 71/200] Iter[  1/196]	 Net1 loss: 5.23
+cifar100:noisy_label | Epoch [ 71/200] Iter[101/196]	 Net1 loss: 5.30
+| Test Epoch #71	 Acc Net1: 59.13%, Acc Net2: 65.96% Acc Mean: 64.65%
+cifar100:noisy_label | Epoch [ 72/200] Iter[  1/196]	 Net1 loss: 4.88
+cifar100:noisy_label | Epoch [ 72/200] Iter[101/196]	 Net1 loss: 4.28
+| Test Epoch #72	 Acc Net1: 58.67%, Acc Net2: 65.96% Acc Mean: 64.70%
+cifar100:noisy_label | Epoch [ 73/200] Iter[  1/196]	 Net1 loss: 5.00
+cifar100:noisy_label | Epoch [ 73/200] Iter[101/196]	 Net1 loss: 3.71
+| Test Epoch #73	 Acc Net1: 59.83%, Acc Net2: 65.96% Acc Mean: 65.27%
+cifar100:noisy_label | Epoch [ 74/200] Iter[  1/196]	 Net1 loss: 5.19
+cifar100:noisy_label | Epoch [ 74/200] Iter[101/196]	 Net1 loss: 4.02
+| Test Epoch #74	 Acc Net1: 59.29%, Acc Net2: 65.96% Acc Mean: 64.79%
+cifar100:noisy_label | Epoch [ 75/200] Iter[  1/196]	 Net1 loss: 4.87
+cifar100:noisy_label | Epoch [ 75/200] Iter[101/196]	 Net1 loss: 3.47
+| Test Epoch #75	 Acc Net1: 59.30%, Acc Net2: 65.96% Acc Mean: 65.06%
+cifar100:noisy_label | Epoch [ 76/200] Iter[  1/196]	 Net1 loss: 5.52
+cifar100:noisy_label | Epoch [ 76/200] Iter[101/196]	 Net1 loss: 4.84
+| Test Epoch #76	 Acc Net1: 60.11%, Acc Net2: 65.96% Acc Mean: 65.29%
+cifar100:noisy_label | Epoch [ 77/200] Iter[  1/196]	 Net1 loss: 5.15
+cifar100:noisy_label | Epoch [ 77/200] Iter[101/196]	 Net1 loss: 4.76
+| Test Epoch #77	 Acc Net1: 59.02%, Acc Net2: 65.96% Acc Mean: 64.55%
+cifar100:noisy_label | Epoch [ 78/200] Iter[  1/196]	 Net1 loss: 3.09
+cifar100:noisy_label | Epoch [ 78/200] Iter[101/196]	 Net1 loss: 4.23
+| Test Epoch #78	 Acc Net1: 59.96%, Acc Net2: 65.96% Acc Mean: 65.01%
+cifar100:noisy_label | Epoch [ 79/200] Iter[  1/196]	 Net1 loss: 3.55
+cifar100:noisy_label | Epoch [ 79/200] Iter[101/196]	 Net1 loss: 2.86
+| Test Epoch #79	 Acc Net1: 59.59%, Acc Net2: 65.96% Acc Mean: 64.78%
+cifar100:noisy_label | Epoch [ 80/200] Iter[  1/196]	 Net1 loss: 4.73
+cifar100:noisy_label | Epoch [ 80/200] Iter[101/196]	 Net1 loss: 5.00
+| Test Epoch #80	 Acc Net1: 59.21%, Acc Net2: 65.96% Acc Mean: 65.01%
+cifar100:noisy_label | Epoch [ 81/200] Iter[  1/196]	 Net1 loss: 5.26
+cifar100:noisy_label | Epoch [ 81/200] Iter[101/196]	 Net1 loss: 4.14
+| Test Epoch #81	 Acc Net1: 60.53%, Acc Net2: 65.96% Acc Mean: 65.49%
+cifar100:noisy_label | Epoch [ 82/200] Iter[  1/196]	 Net1 loss: 4.79
+cifar100:noisy_label | Epoch [ 82/200] Iter[101/196]	 Net1 loss: 3.97
+| Test Epoch #82	 Acc Net1: 59.74%, Acc Net2: 65.96% Acc Mean: 65.27%
+cifar100:noisy_label | Epoch [ 83/200] Iter[  1/196]	 Net1 loss: 4.97
+cifar100:noisy_label | Epoch [ 83/200] Iter[101/196]	 Net1 loss: 5.23
+| Test Epoch #83	 Acc Net1: 59.53%, Acc Net2: 65.96% Acc Mean: 65.31%
+cifar100:noisy_label | Epoch [ 84/200] Iter[  1/196]	 Net1 loss: 5.09
+cifar100:noisy_label | Epoch [ 84/200] Iter[101/196]	 Net1 loss: 3.38
+| Test Epoch #84	 Acc Net1: 58.64%, Acc Net2: 65.96% Acc Mean: 64.73%
+cifar100:noisy_label | Epoch [ 85/200] Iter[  1/196]	 Net1 loss: 3.72
+cifar100:noisy_label | Epoch [ 85/200] Iter[101/196]	 Net1 loss: 3.56
+| Test Epoch #85	 Acc Net1: 59.50%, Acc Net2: 65.96% Acc Mean: 64.78%
+cifar100:noisy_label | Epoch [ 86/200] Iter[  1/196]	 Net1 loss: 4.43
+cifar100:noisy_label | Epoch [ 86/200] Iter[101/196]	 Net1 loss: 2.43
+| Test Epoch #86	 Acc Net1: 60.31%, Acc Net2: 65.96% Acc Mean: 65.46%
+cifar100:noisy_label | Epoch [ 87/200] Iter[  1/196]	 Net1 loss: 4.28
+cifar100:noisy_label | Epoch [ 87/200] Iter[101/196]	 Net1 loss: 4.06
+| Test Epoch #87	 Acc Net1: 59.18%, Acc Net2: 65.96% Acc Mean: 64.96%
+cifar100:noisy_label | Epoch [ 88/200] Iter[  1/196]	 Net1 loss: 4.94
+cifar100:noisy_label | Epoch [ 88/200] Iter[101/196]	 Net1 loss: 4.24
+| Test Epoch #88	 Acc Net1: 58.67%, Acc Net2: 65.96% Acc Mean: 64.65%
+cifar100:noisy_label | Epoch [ 89/200] Iter[  1/196]	 Net1 loss: 5.18
+cifar100:noisy_label | Epoch [ 89/200] Iter[101/196]	 Net1 loss: 3.17
+| Test Epoch #89	 Acc Net1: 58.92%, Acc Net2: 65.96% Acc Mean: 64.55%
+cifar100:noisy_label | Epoch [ 90/200] Iter[  1/196]	 Net1 loss: 4.06
+cifar100:noisy_label | Epoch [ 90/200] Iter[101/196]	 Net1 loss: 3.67
+| Test Epoch #90	 Acc Net1: 59.04%, Acc Net2: 65.96% Acc Mean: 64.75%
+cifar100:noisy_label | Epoch [ 91/200] Iter[  1/196]	 Net1 loss: 4.28
+cifar100:noisy_label | Epoch [ 91/200] Iter[101/196]	 Net1 loss: 4.28
+| Test Epoch #91	 Acc Net1: 57.67%, Acc Net2: 65.96% Acc Mean: 65.07%
+cifar100:noisy_label | Epoch [ 92/200] Iter[  1/196]	 Net1 loss: 5.29
+cifar100:noisy_label | Epoch [ 92/200] Iter[101/196]	 Net1 loss: 2.53
+| Test Epoch #92	 Acc Net1: 58.62%, Acc Net2: 65.96% Acc Mean: 64.28%
+cifar100:noisy_label | Epoch [ 93/200] Iter[  1/196]	 Net1 loss: 3.90
+cifar100:noisy_label | Epoch [ 93/200] Iter[101/196]	 Net1 loss: 5.55
+| Test Epoch #93	 Acc Net1: 59.00%, Acc Net2: 65.96% Acc Mean: 64.91%
+cifar100:noisy_label | Epoch [ 94/200] Iter[  1/196]	 Net1 loss: 3.62
+cifar100:noisy_label | Epoch [ 94/200] Iter[101/196]	 Net1 loss: 4.84
+| Test Epoch #94	 Acc Net1: 58.32%, Acc Net2: 65.96% Acc Mean: 64.51%
+cifar100:noisy_label | Epoch [ 95/200] Iter[  1/196]	 Net1 loss: 3.14
+cifar100:noisy_label | Epoch [ 95/200] Iter[101/196]	 Net1 loss: 5.18
+| Test Epoch #95	 Acc Net1: 58.57%, Acc Net2: 65.96% Acc Mean: 64.98%
+cifar100:noisy_label | Epoch [ 96/200] Iter[  1/196]	 Net1 loss: 4.61
+cifar100:noisy_label | Epoch [ 96/200] Iter[101/196]	 Net1 loss: 5.73
+| Test Epoch #96	 Acc Net1: 58.09%, Acc Net2: 65.96% Acc Mean: 64.80%
+cifar100:noisy_label | Epoch [ 97/200] Iter[  1/196]	 Net1 loss: 2.35
+cifar100:noisy_label | Epoch [ 97/200] Iter[101/196]	 Net1 loss: 5.58
+| Test Epoch #97	 Acc Net1: 58.41%, Acc Net2: 65.96% Acc Mean: 64.98%
+cifar100:noisy_label | Epoch [ 98/200] Iter[  1/196]	 Net1 loss: 3.32
+cifar100:noisy_label | Epoch [ 98/200] Iter[101/196]	 Net1 loss: 3.15
+| Test Epoch #98	 Acc Net1: 57.77%, Acc Net2: 65.96% Acc Mean: 64.55%
+cifar100:noisy_label | Epoch [ 99/200] Iter[  1/196]	 Net1 loss: 4.35
+cifar100:noisy_label | Epoch [ 99/200] Iter[101/196]	 Net1 loss: 3.62
+| Test Epoch #99	 Acc Net1: 57.85%, Acc Net2: 65.96% Acc Mean: 64.59%
+cifar100:noisy_label | Epoch [100/200] Iter[  1/196]	 Net1 loss: 5.18
+cifar100:noisy_label | Epoch [100/200] Iter[101/196]	 Net1 loss: 4.81
+| Test Epoch #100	 Acc Net1: 57.70%, Acc Net2: 65.96% Acc Mean: 64.70%
+cifar100:noisy_label | Epoch [101/200] Iter[  1/196]	 Net1 loss: 4.83
+cifar100:noisy_label | Epoch [101/200] Iter[101/196]	 Net1 loss: 5.06
+| Test Epoch #101	 Acc Net1: 58.31%, Acc Net2: 65.96% Acc Mean: 64.67%
+cifar100:noisy_label | Epoch [102/200] Iter[  1/196]	 Net1 loss: 4.35
+cifar100:noisy_label | Epoch [102/200] Iter[101/196]	 Net1 loss: 5.28
+| Test Epoch #102	 Acc Net1: 58.92%, Acc Net2: 65.96% Acc Mean: 64.76%
+cifar100:noisy_label | Epoch [103/200] Iter[  1/196]	 Net1 loss: 3.94
+cifar100:noisy_label | Epoch [103/200] Iter[101/196]	 Net1 loss: 5.52
+| Test Epoch #103	 Acc Net1: 57.99%, Acc Net2: 65.96% Acc Mean: 64.37%
+cifar100:noisy_label | Epoch [104/200] Iter[  1/196]	 Net1 loss: 4.93
+cifar100:noisy_label | Epoch [104/200] Iter[101/196]	 Net1 loss: 4.83
+| Test Epoch #104	 Acc Net1: 58.54%, Acc Net2: 65.96% Acc Mean: 64.54%
+cifar100:noisy_label | Epoch [105/200] Iter[  1/196]	 Net1 loss: 5.57
+cifar100:noisy_label | Epoch [105/200] Iter[101/196]	 Net1 loss: 5.39
+| Test Epoch #105	 Acc Net1: 58.49%, Acc Net2: 65.96% Acc Mean: 64.44%
+cifar100:noisy_label | Epoch [106/200] Iter[  1/196]	 Net1 loss: 3.24
+cifar100:noisy_label | Epoch [106/200] Iter[101/196]	 Net1 loss: 4.60
+| Test Epoch #106	 Acc Net1: 58.20%, Acc Net2: 65.96% Acc Mean: 64.75%
+cifar100:noisy_label | Epoch [107/200] Iter[  1/196]	 Net1 loss: 5.26
+cifar100:noisy_label | Epoch [107/200] Iter[101/196]	 Net1 loss: 2.07
+| Test Epoch #107	 Acc Net1: 58.70%, Acc Net2: 65.96% Acc Mean: 64.89%
+cifar100:noisy_label | Epoch [108/200] Iter[  1/196]	 Net1 loss: 5.16
+cifar100:noisy_label | Epoch [108/200] Iter[101/196]	 Net1 loss: 5.81
+| Test Epoch #108	 Acc Net1: 58.32%, Acc Net2: 65.96% Acc Mean: 64.79%
+cifar100:noisy_label | Epoch [109/200] Iter[  1/196]	 Net1 loss: 5.15
+cifar100:noisy_label | Epoch [109/200] Iter[101/196]	 Net1 loss: 5.22
+| Test Epoch #109	 Acc Net1: 57.96%, Acc Net2: 65.96% Acc Mean: 64.73%
+cifar100:noisy_label | Epoch [110/200] Iter[  1/196]	 Net1 loss: 3.49
+cifar100:noisy_label | Epoch [110/200] Iter[101/196]	 Net1 loss: 4.88
+| Test Epoch #110	 Acc Net1: 58.80%, Acc Net2: 65.96% Acc Mean: 65.20%
+cifar100:noisy_label | Epoch [111/200] Iter[  1/196]	 Net1 loss: 3.06
+cifar100:noisy_label | Epoch [111/200] Iter[101/196]	 Net1 loss: 3.81
+| Test Epoch #111	 Acc Net1: 59.29%, Acc Net2: 65.96% Acc Mean: 65.02%
+cifar100:noisy_label | Epoch [112/200] Iter[  1/196]	 Net1 loss: 5.45
+cifar100:noisy_label | Epoch [112/200] Iter[101/196]	 Net1 loss: 4.51
+| Test Epoch #112	 Acc Net1: 58.26%, Acc Net2: 65.96% Acc Mean: 64.94%
+cifar100:noisy_label | Epoch [113/200] Iter[  1/196]	 Net1 loss: 4.29
+cifar100:noisy_label | Epoch [113/200] Iter[101/196]	 Net1 loss: 2.87
+| Test Epoch #113	 Acc Net1: 58.80%, Acc Net2: 65.96% Acc Mean: 65.12%
+cifar100:noisy_label | Epoch [114/200] Iter[  1/196]	 Net1 loss: 4.88
+cifar100:noisy_label | Epoch [114/200] Iter[101/196]	 Net1 loss: 2.83
+| Test Epoch #114	 Acc Net1: 58.14%, Acc Net2: 65.96% Acc Mean: 64.71%
+cifar100:noisy_label | Epoch [115/200] Iter[  1/196]	 Net1 loss: 4.42
+cifar100:noisy_label | Epoch [115/200] Iter[101/196]	 Net1 loss: 2.15
+| Test Epoch #115	 Acc Net1: 57.60%, Acc Net2: 65.96% Acc Mean: 64.56%
+cifar100:noisy_label | Epoch [116/200] Iter[  1/196]	 Net1 loss: 4.79
+cifar100:noisy_label | Epoch [116/200] Iter[101/196]	 Net1 loss: 2.81
+| Test Epoch #116	 Acc Net1: 58.86%, Acc Net2: 65.96% Acc Mean: 65.01%
+cifar100:noisy_label | Epoch [117/200] Iter[  1/196]	 Net1 loss: 3.66
+cifar100:noisy_label | Epoch [117/200] Iter[101/196]	 Net1 loss: 5.05
+| Test Epoch #117	 Acc Net1: 58.88%, Acc Net2: 65.96% Acc Mean: 65.07%
+cifar100:noisy_label | Epoch [118/200] Iter[  1/196]	 Net1 loss: 4.07
+cifar100:noisy_label | Epoch [118/200] Iter[101/196]	 Net1 loss: 5.04
+| Test Epoch #118	 Acc Net1: 57.95%, Acc Net2: 65.96% Acc Mean: 64.59%
+cifar100:noisy_label | Epoch [119/200] Iter[  1/196]	 Net1 loss: 3.27
+cifar100:noisy_label | Epoch [119/200] Iter[101/196]	 Net1 loss: 5.56
+| Test Epoch #119	 Acc Net1: 58.32%, Acc Net2: 65.96% Acc Mean: 64.84%
+cifar100:noisy_label | Epoch [120/200] Iter[  1/196]	 Net1 loss: 4.58
+cifar100:noisy_label | Epoch [120/200] Iter[101/196]	 Net1 loss: 5.84
+| Test Epoch #120	 Acc Net1: 58.38%, Acc Net2: 65.96% Acc Mean: 64.73%
+cifar100:noisy_label | Epoch [121/200] Iter[  1/196]	 Net1 loss: 2.31
+cifar100:noisy_label | Epoch [121/200] Iter[101/196]	 Net1 loss: 3.10
+| Test Epoch #121	 Acc Net1: 58.02%, Acc Net2: 65.96% Acc Mean: 64.72%
+cifar100:noisy_label | Epoch [122/200] Iter[  1/196]	 Net1 loss: 5.15
+cifar100:noisy_label | Epoch [122/200] Iter[101/196]	 Net1 loss: 5.53
+| Test Epoch #122	 Acc Net1: 57.90%, Acc Net2: 65.96% Acc Mean: 64.01%
+cifar100:noisy_label | Epoch [123/200] Iter[  1/196]	 Net1 loss: 3.98
+cifar100:noisy_label | Epoch [123/200] Iter[101/196]	 Net1 loss: 4.76
+| Test Epoch #123	 Acc Net1: 58.37%, Acc Net2: 65.96% Acc Mean: 64.77%
+cifar100:noisy_label | Epoch [124/200] Iter[  1/196]	 Net1 loss: 3.67
+cifar100:noisy_label | Epoch [124/200] Iter[101/196]	 Net1 loss: 5.06
+| Test Epoch #124	 Acc Net1: 58.39%, Acc Net2: 65.96% Acc Mean: 64.87%
+cifar100:noisy_label | Epoch [125/200] Iter[  1/196]	 Net1 loss: 4.71
+cifar100:noisy_label | Epoch [125/200] Iter[101/196]	 Net1 loss: 3.34
+| Test Epoch #125	 Acc Net1: 58.47%, Acc Net2: 65.96% Acc Mean: 64.89%
+cifar100:noisy_label | Epoch [126/200] Iter[  1/196]	 Net1 loss: 3.06
+cifar100:noisy_label | Epoch [126/200] Iter[101/196]	 Net1 loss: 5.30
+| Test Epoch #126	 Acc Net1: 58.40%, Acc Net2: 65.96% Acc Mean: 64.87%
+cifar100:noisy_label | Epoch [127/200] Iter[  1/196]	 Net1 loss: 1.67
+cifar100:noisy_label | Epoch [127/200] Iter[101/196]	 Net1 loss: 5.46
+| Test Epoch #127	 Acc Net1: 57.91%, Acc Net2: 65.96% Acc Mean: 64.66%
+cifar100:noisy_label | Epoch [128/200] Iter[  1/196]	 Net1 loss: 2.72
+cifar100:noisy_label | Epoch [128/200] Iter[101/196]	 Net1 loss: 2.94
+| Test Epoch #128	 Acc Net1: 57.76%, Acc Net2: 65.96% Acc Mean: 64.60%
+cifar100:noisy_label | Epoch [129/200] Iter[  1/196]	 Net1 loss: 5.45
+cifar100:noisy_label | Epoch [129/200] Iter[101/196]	 Net1 loss: 3.82
+| Test Epoch #129	 Acc Net1: 58.34%, Acc Net2: 65.96% Acc Mean: 65.10%
+cifar100:noisy_label | Epoch [130/200] Iter[  1/196]	 Net1 loss: 4.40
+cifar100:noisy_label | Epoch [130/200] Iter[101/196]	 Net1 loss: 5.43
+| Test Epoch #130	 Acc Net1: 57.58%, Acc Net2: 65.96% Acc Mean: 64.41%
+cifar100:noisy_label | Epoch [131/200] Iter[  1/196]	 Net1 loss: 4.41
+cifar100:noisy_label | Epoch [131/200] Iter[101/196]	 Net1 loss: 4.02
+| Test Epoch #131	 Acc Net1: 57.68%, Acc Net2: 65.96% Acc Mean: 64.57%
+cifar100:noisy_label | Epoch [132/200] Iter[  1/196]	 Net1 loss: 4.86
+cifar100:noisy_label | Epoch [132/200] Iter[101/196]	 Net1 loss: 4.19
+| Test Epoch #132	 Acc Net1: 58.18%, Acc Net2: 65.96% Acc Mean: 64.54%
+cifar100:noisy_label | Epoch [133/200] Iter[  1/196]	 Net1 loss: 4.24
+cifar100:noisy_label | Epoch [133/200] Iter[101/196]	 Net1 loss: 2.64
+| Test Epoch #133	 Acc Net1: 58.06%, Acc Net2: 65.96% Acc Mean: 64.89%
+cifar100:noisy_label | Epoch [134/200] Iter[  1/196]	 Net1 loss: 4.94
+cifar100:noisy_label | Epoch [134/200] Iter[101/196]	 Net1 loss: 3.04
+| Test Epoch #134	 Acc Net1: 58.30%, Acc Net2: 65.96% Acc Mean: 65.07%
+cifar100:noisy_label | Epoch [135/200] Iter[  1/196]	 Net1 loss: 5.18
+cifar100:noisy_label | Epoch [135/200] Iter[101/196]	 Net1 loss: 3.40
+| Test Epoch #135	 Acc Net1: 58.32%, Acc Net2: 65.96% Acc Mean: 64.85%
+cifar100:noisy_label | Epoch [136/200] Iter[  1/196]	 Net1 loss: 5.27
+cifar100:noisy_label | Epoch [136/200] Iter[101/196]	 Net1 loss: 4.52
+| Test Epoch #136	 Acc Net1: 58.18%, Acc Net2: 65.96% Acc Mean: 64.74%
+cifar100:noisy_label | Epoch [137/200] Iter[  1/196]	 Net1 loss: 3.92
+cifar100:noisy_label | Epoch [137/200] Iter[101/196]	 Net1 loss: 5.24
+| Test Epoch #137	 Acc Net1: 58.21%, Acc Net2: 65.96% Acc Mean: 64.77%
+cifar100:noisy_label | Epoch [138/200] Iter[  1/196]	 Net1 loss: 2.88
+cifar100:noisy_label | Epoch [138/200] Iter[101/196]	 Net1 loss: 5.32
+| Test Epoch #138	 Acc Net1: 58.65%, Acc Net2: 65.96% Acc Mean: 64.85%
+cifar100:noisy_label | Epoch [139/200] Iter[  1/196]	 Net1 loss: 3.20
+cifar100:noisy_label | Epoch [139/200] Iter[101/196]	 Net1 loss: 5.46
+| Test Epoch #139	 Acc Net1: 58.18%, Acc Net2: 65.96% Acc Mean: 64.49%
+cifar100:noisy_label | Epoch [140/200] Iter[  1/196]	 Net1 loss: 5.16
+cifar100:noisy_label | Epoch [140/200] Iter[101/196]	 Net1 loss: 4.86
+| Test Epoch #140	 Acc Net1: 58.35%, Acc Net2: 65.96% Acc Mean: 64.68%
+cifar100:noisy_label | Epoch [141/200] Iter[  1/196]	 Net1 loss: 4.47
+cifar100:noisy_label | Epoch [141/200] Iter[101/196]	 Net1 loss: 4.23
+| Test Epoch #141	 Acc Net1: 58.12%, Acc Net2: 65.96% Acc Mean: 64.34%
+cifar100:noisy_label | Epoch [142/200] Iter[  1/196]	 Net1 loss: 3.93
+cifar100:noisy_label | Epoch [142/200] Iter[101/196]	 Net1 loss: 5.02
+| Test Epoch #142	 Acc Net1: 57.92%, Acc Net2: 65.96% Acc Mean: 64.85%
+cifar100:noisy_label | Epoch [143/200] Iter[  1/196]	 Net1 loss: 4.71
+cifar100:noisy_label | Epoch [143/200] Iter[101/196]	 Net1 loss: 4.98
+| Test Epoch #143	 Acc Net1: 58.16%, Acc Net2: 65.96% Acc Mean: 64.82%
+cifar100:noisy_label | Epoch [144/200] Iter[  1/196]	 Net1 loss: 5.02
+cifar100:noisy_label | Epoch [144/200] Iter[101/196]	 Net1 loss: 4.03
+| Test Epoch #144	 Acc Net1: 58.30%, Acc Net2: 65.96% Acc Mean: 64.96%
+cifar100:noisy_label | Epoch [145/200] Iter[  1/196]	 Net1 loss: 4.81
+cifar100:noisy_label | Epoch [145/200] Iter[101/196]	 Net1 loss: 4.13
+| Test Epoch #145	 Acc Net1: 58.32%, Acc Net2: 65.96% Acc Mean: 65.03%
+cifar100:noisy_label | Epoch [146/200] Iter[  1/196]	 Net1 loss: 5.35
+cifar100:noisy_label | Epoch [146/200] Iter[101/196]	 Net1 loss: 3.42
+| Test Epoch #146	 Acc Net1: 58.67%, Acc Net2: 65.96% Acc Mean: 65.13%
+cifar100:noisy_label | Epoch [147/200] Iter[  1/196]	 Net1 loss: 3.98
+cifar100:noisy_label | Epoch [147/200] Iter[101/196]	 Net1 loss: 2.33
+| Test Epoch #147	 Acc Net1: 58.48%, Acc Net2: 65.96% Acc Mean: 65.08%
+cifar100:noisy_label | Epoch [148/200] Iter[  1/196]	 Net1 loss: 3.05
+cifar100:noisy_label | Epoch [148/200] Iter[101/196]	 Net1 loss: 4.83
+| Test Epoch #148	 Acc Net1: 58.84%, Acc Net2: 65.96% Acc Mean: 65.07%
+cifar100:noisy_label | Epoch [149/200] Iter[  1/196]	 Net1 loss: 3.26
+cifar100:noisy_label | Epoch [149/200] Iter[101/196]	 Net1 loss: 5.13
+| Test Epoch #149	 Acc Net1: 58.89%, Acc Net2: 65.96% Acc Mean: 65.14%
+cifar100:noisy_label | Epoch [150/200] Iter[  1/196]	 Net1 loss: 4.52
+cifar100:noisy_label | Epoch [150/200] Iter[101/196]	 Net1 loss: 5.48
+| Test Epoch #150	 Acc Net1: 58.63%, Acc Net2: 65.96% Acc Mean: 64.82%
+cifar100:noisy_label | Epoch [151/200] Iter[  1/196]	 Net1 loss: 3.09
+cifar100:noisy_label | Epoch [151/200] Iter[101/196]	 Net1 loss: 5.32
+| Test Epoch #151	 Acc Net1: 58.35%, Acc Net2: 65.96% Acc Mean: 64.84%
+cifar100:noisy_label | Epoch [152/200] Iter[  1/196]	 Net1 loss: 4.96
+cifar100:noisy_label | Epoch [152/200] Iter[101/196]	 Net1 loss: 4.56
+| Test Epoch #152	 Acc Net1: 58.70%, Acc Net2: 65.96% Acc Mean: 64.89%
+cifar100:noisy_label | Epoch [153/200] Iter[  1/196]	 Net1 loss: 4.97
+cifar100:noisy_label | Epoch [153/200] Iter[101/196]	 Net1 loss: 4.60
+| Test Epoch #153	 Acc Net1: 58.85%, Acc Net2: 65.96% Acc Mean: 64.73%
+cifar100:noisy_label | Epoch [154/200] Iter[  1/196]	 Net1 loss: 5.08
+cifar100:noisy_label | Epoch [154/200] Iter[101/196]	 Net1 loss: 4.43
+| Test Epoch #154	 Acc Net1: 58.41%, Acc Net2: 65.96% Acc Mean: 65.06%
+cifar100:noisy_label | Epoch [155/200] Iter[  1/196]	 Net1 loss: 3.64
+cifar100:noisy_label | Epoch [155/200] Iter[101/196]	 Net1 loss: 4.98
+| Test Epoch #155	 Acc Net1: 58.66%, Acc Net2: 65.96% Acc Mean: 64.75%
+cifar100:noisy_label | Epoch [156/200] Iter[  1/196]	 Net1 loss: 5.38
+cifar100:noisy_label | Epoch [156/200] Iter[101/196]	 Net1 loss: 4.02
+| Test Epoch #156	 Acc Net1: 59.17%, Acc Net2: 65.96% Acc Mean: 65.12%
+cifar100:noisy_label | Epoch [157/200] Iter[  1/196]	 Net1 loss: 5.55
+cifar100:noisy_label | Epoch [157/200] Iter[101/196]	 Net1 loss: 5.55
+| Test Epoch #157	 Acc Net1: 58.72%, Acc Net2: 65.96% Acc Mean: 64.96%
+cifar100:noisy_label | Epoch [158/200] Iter[  1/196]	 Net1 loss: 3.64
+cifar100:noisy_label | Epoch [158/200] Iter[101/196]	 Net1 loss: 5.71
+| Test Epoch #158	 Acc Net1: 58.74%, Acc Net2: 65.96% Acc Mean: 65.25%
+cifar100:noisy_label | Epoch [159/200] Iter[  1/196]	 Net1 loss: 3.15
+cifar100:noisy_label | Epoch [159/200] Iter[101/196]	 Net1 loss: 5.14
+| Test Epoch #159	 Acc Net1: 58.91%, Acc Net2: 65.96% Acc Mean: 65.16%
+cifar100:noisy_label | Epoch [160/200] Iter[  1/196]	 Net1 loss: 4.64
+cifar100:noisy_label | Epoch [160/200] Iter[101/196]	 Net1 loss: 4.31
+| Test Epoch #160	 Acc Net1: 58.49%, Acc Net2: 65.96% Acc Mean: 64.61%
+cifar100:noisy_label | Epoch [161/200] Iter[  1/196]	 Net1 loss: 5.12
+cifar100:noisy_label | Epoch [161/200] Iter[101/196]	 Net1 loss: 3.61
+| Test Epoch #161	 Acc Net1: 58.61%, Acc Net2: 65.96% Acc Mean: 64.93%
+cifar100:noisy_label | Epoch [162/200] Iter[  1/196]	 Net1 loss: 3.95
+cifar100:noisy_label | Epoch [162/200] Iter[101/196]	 Net1 loss: 3.44
+| Test Epoch #162	 Acc Net1: 58.68%, Acc Net2: 65.96% Acc Mean: 65.16%
+cifar100:noisy_label | Epoch [163/200] Iter[  1/196]	 Net1 loss: 4.07
+cifar100:noisy_label | Epoch [163/200] Iter[101/196]	 Net1 loss: 5.39
+| Test Epoch #163	 Acc Net1: 58.32%, Acc Net2: 65.96% Acc Mean: 64.90%
+cifar100:noisy_label | Epoch [164/200] Iter[  1/196]	 Net1 loss: 3.81
+cifar100:noisy_label | Epoch [164/200] Iter[101/196]	 Net1 loss: 3.24
+| Test Epoch #164	 Acc Net1: 59.01%, Acc Net2: 65.96% Acc Mean: 64.98%
+cifar100:noisy_label | Epoch [165/200] Iter[  1/196]	 Net1 loss: 4.33
+cifar100:noisy_label | Epoch [165/200] Iter[101/196]	 Net1 loss: 3.96
+| Test Epoch #165	 Acc Net1: 59.21%, Acc Net2: 65.96% Acc Mean: 65.13%
+cifar100:noisy_label | Epoch [166/200] Iter[  1/196]	 Net1 loss: 3.85
+cifar100:noisy_label | Epoch [166/200] Iter[101/196]	 Net1 loss: 4.07
+| Test Epoch #166	 Acc Net1: 59.12%, Acc Net2: 65.96% Acc Mean: 65.16%
+cifar100:noisy_label | Epoch [167/200] Iter[  1/196]	 Net1 loss: 3.62
+cifar100:noisy_label | Epoch [167/200] Iter[101/196]	 Net1 loss: 4.52
+| Test Epoch #167	 Acc Net1: 59.02%, Acc Net2: 65.96% Acc Mean: 65.11%
+cifar100:noisy_label | Epoch [168/200] Iter[  1/196]	 Net1 loss: 4.09
+cifar100:noisy_label | Epoch [168/200] Iter[101/196]	 Net1 loss: 5.21
+| Test Epoch #168	 Acc Net1: 58.83%, Acc Net2: 65.96% Acc Mean: 65.00%
+cifar100:noisy_label | Epoch [169/200] Iter[  1/196]	 Net1 loss: 4.87
+cifar100:noisy_label | Epoch [169/200] Iter[101/196]	 Net1 loss: 4.49
+| Test Epoch #169	 Acc Net1: 58.75%, Acc Net2: 65.96% Acc Mean: 65.09%
+cifar100:noisy_label | Epoch [170/200] Iter[  1/196]	 Net1 loss: 5.36
+cifar100:noisy_label | Epoch [170/200] Iter[101/196]	 Net1 loss: 3.89
+| Test Epoch #170	 Acc Net1: 59.02%, Acc Net2: 65.96% Acc Mean: 65.02%
+cifar100:noisy_label | Epoch [171/200] Iter[  1/196]	 Net1 loss: 3.63
+cifar100:noisy_label | Epoch [171/200] Iter[101/196]	 Net1 loss: 5.28
+| Test Epoch #171	 Acc Net1: 58.82%, Acc Net2: 65.96% Acc Mean: 65.14%
+cifar100:noisy_label | Epoch [172/200] Iter[  1/196]	 Net1 loss: 4.64
+cifar100:noisy_label | Epoch [172/200] Iter[101/196]	 Net1 loss: 3.90
+| Test Epoch #172	 Acc Net1: 58.75%, Acc Net2: 65.96% Acc Mean: 65.07%
+cifar100:noisy_label | Epoch [173/200] Iter[  1/196]	 Net1 loss: 3.37
+cifar100:noisy_label | Epoch [173/200] Iter[101/196]	 Net1 loss: 2.71
+| Test Epoch #173	 Acc Net1: 59.24%, Acc Net2: 65.96% Acc Mean: 65.09%
+cifar100:noisy_label | Epoch [174/200] Iter[  1/196]	 Net1 loss: 4.45
+cifar100:noisy_label | Epoch [174/200] Iter[101/196]	 Net1 loss: 4.98
+| Test Epoch #174	 Acc Net1: 59.41%, Acc Net2: 65.96% Acc Mean: 65.35%
+cifar100:noisy_label | Epoch [175/200] Iter[  1/196]	 Net1 loss: 3.33
+cifar100:noisy_label | Epoch [175/200] Iter[101/196]	 Net1 loss: 5.09
+| Test Epoch #175	 Acc Net1: 58.95%, Acc Net2: 65.96% Acc Mean: 65.14%
+cifar100:noisy_label | Epoch [176/200] Iter[  1/196]	 Net1 loss: 4.82
+cifar100:noisy_label | Epoch [176/200] Iter[101/196]	 Net1 loss: 3.90
+| Test Epoch #176	 Acc Net1: 59.20%, Acc Net2: 65.96% Acc Mean: 65.51%
+cifar100:noisy_label | Epoch [177/200] Iter[  1/196]	 Net1 loss: 5.06
+cifar100:noisy_label | Epoch [177/200] Iter[101/196]	 Net1 loss: 5.35
+| Test Epoch #177	 Acc Net1: 59.03%, Acc Net2: 65.96% Acc Mean: 65.16%
+cifar100:noisy_label | Epoch [178/200] Iter[  1/196]	 Net1 loss: 4.52
+cifar100:noisy_label | Epoch [178/200] Iter[101/196]	 Net1 loss: 4.05
+| Test Epoch #178	 Acc Net1: 59.14%, Acc Net2: 65.96% Acc Mean: 65.15%
+cifar100:noisy_label | Epoch [179/200] Iter[  1/196]	 Net1 loss: 5.13
+cifar100:noisy_label | Epoch [179/200] Iter[101/196]	 Net1 loss: 5.11
+| Test Epoch #179	 Acc Net1: 58.95%, Acc Net2: 65.96% Acc Mean: 65.29%
+cifar100:noisy_label | Epoch [180/200] Iter[  1/196]	 Net1 loss: 3.26
+cifar100:noisy_label | Epoch [180/200] Iter[101/196]	 Net1 loss: 3.72
+| Test Epoch #180	 Acc Net1: 59.00%, Acc Net2: 65.96% Acc Mean: 65.11%
+cifar100:noisy_label | Epoch [181/200] Iter[  1/196]	 Net1 loss: 2.21
+cifar100:noisy_label | Epoch [181/200] Iter[101/196]	 Net1 loss: 4.78
+| Test Epoch #181	 Acc Net1: 59.20%, Acc Net2: 65.96% Acc Mean: 65.25%
+cifar100:noisy_label | Epoch [182/200] Iter[  1/196]	 Net1 loss: 5.34
+cifar100:noisy_label | Epoch [182/200] Iter[101/196]	 Net1 loss: 4.63
+| Test Epoch #182	 Acc Net1: 59.00%, Acc Net2: 65.96% Acc Mean: 65.12%
+cifar100:noisy_label | Epoch [183/200] Iter[  1/196]	 Net1 loss: 4.87
+cifar100:noisy_label | Epoch [183/200] Iter[101/196]	 Net1 loss: 4.90
+| Test Epoch #183	 Acc Net1: 59.22%, Acc Net2: 65.96% Acc Mean: 65.30%
+cifar100:noisy_label | Epoch [184/200] Iter[  1/196]	 Net1 loss: 4.38
+cifar100:noisy_label | Epoch [184/200] Iter[101/196]	 Net1 loss: 4.56
+| Test Epoch #184	 Acc Net1: 59.10%, Acc Net2: 65.96% Acc Mean: 65.07%
+cifar100:noisy_label | Epoch [185/200] Iter[  1/196]	 Net1 loss: 4.26
+cifar100:noisy_label | Epoch [185/200] Iter[101/196]	 Net1 loss: 3.84
+| Test Epoch #185	 Acc Net1: 59.38%, Acc Net2: 65.96% Acc Mean: 65.18%
+cifar100:noisy_label | Epoch [186/200] Iter[  1/196]	 Net1 loss: 3.16
+cifar100:noisy_label | Epoch [186/200] Iter[101/196]	 Net1 loss: 4.32
+| Test Epoch #186	 Acc Net1: 59.36%, Acc Net2: 65.96% Acc Mean: 65.29%
+cifar100:noisy_label | Epoch [187/200] Iter[  1/196]	 Net1 loss: 3.02
+cifar100:noisy_label | Epoch [187/200] Iter[101/196]	 Net1 loss: 5.13
+| Test Epoch #187	 Acc Net1: 59.26%, Acc Net2: 65.96% Acc Mean: 65.16%
+cifar100:noisy_label | Epoch [188/200] Iter[  1/196]	 Net1 loss: 4.36
+cifar100:noisy_label | Epoch [188/200] Iter[101/196]	 Net1 loss: 2.57
+| Test Epoch #188	 Acc Net1: 58.97%, Acc Net2: 65.96% Acc Mean: 65.07%
+cifar100:noisy_label | Epoch [189/200] Iter[  1/196]	 Net1 loss: 3.87
+cifar100:noisy_label | Epoch [189/200] Iter[101/196]	 Net1 loss: 4.88
+| Test Epoch #189	 Acc Net1: 59.28%, Acc Net2: 65.96% Acc Mean: 65.17%
+cifar100:noisy_label | Epoch [190/200] Iter[  1/196]	 Net1 loss: 3.87
+cifar100:noisy_label | Epoch [190/200] Iter[101/196]	 Net1 loss: 4.42
+| Test Epoch #190	 Acc Net1: 59.03%, Acc Net2: 65.96% Acc Mean: 65.24%
+cifar100:noisy_label | Epoch [191/200] Iter[  1/196]	 Net1 loss: 5.39
+cifar100:noisy_label | Epoch [191/200] Iter[101/196]	 Net1 loss: 3.71
+| Test Epoch #191	 Acc Net1: 59.43%, Acc Net2: 65.96% Acc Mean: 65.27%
+cifar100:noisy_label | Epoch [192/200] Iter[  1/196]	 Net1 loss: 3.72
+cifar100:noisy_label | Epoch [192/200] Iter[101/196]	 Net1 loss: 2.76
+| Test Epoch #192	 Acc Net1: 59.11%, Acc Net2: 65.96% Acc Mean: 65.12%
+cifar100:noisy_label | Epoch [193/200] Iter[  1/196]	 Net1 loss: 4.71
+cifar100:noisy_label | Epoch [193/200] Iter[101/196]	 Net1 loss: 1.86
+| Test Epoch #193	 Acc Net1: 59.23%, Acc Net2: 65.96% Acc Mean: 65.28%
+cifar100:noisy_label | Epoch [194/200] Iter[  1/196]	 Net1 loss: 4.68
+cifar100:noisy_label | Epoch [194/200] Iter[101/196]	 Net1 loss: 5.61
+| Test Epoch #194	 Acc Net1: 59.23%, Acc Net2: 65.96% Acc Mean: 65.24%
+cifar100:noisy_label | Epoch [195/200] Iter[  1/196]	 Net1 loss: 4.78
+cifar100:noisy_label | Epoch [195/200] Iter[101/196]	 Net1 loss: 4.47
+| Test Epoch #195	 Acc Net1: 59.42%, Acc Net2: 65.96% Acc Mean: 65.10%
+cifar100:noisy_label | Epoch [196/200] Iter[  1/196]	 Net1 loss: 4.67
+cifar100:noisy_label | Epoch [196/200] Iter[101/196]	 Net1 loss: 4.35
+| Test Epoch #196	 Acc Net1: 58.86%, Acc Net2: 65.96% Acc Mean: 65.09%
+cifar100:noisy_label | Epoch [197/200] Iter[  1/196]	 Net1 loss: 3.34
+cifar100:noisy_label | Epoch [197/200] Iter[101/196]	 Net1 loss: 3.22
+| Test Epoch #197	 Acc Net1: 59.44%, Acc Net2: 65.96% Acc Mean: 65.21%
+cifar100:noisy_label | Epoch [198/200] Iter[  1/196]	 Net1 loss: 4.49
+cifar100:noisy_label | Epoch [198/200] Iter[101/196]	 Net1 loss: 4.17
+| Test Epoch #198	 Acc Net1: 59.30%, Acc Net2: 65.96% Acc Mean: 65.12%
+cifar100:noisy_label | Epoch [199/200] Iter[  1/196]	 Net1 loss: 4.99
+cifar100:noisy_label | Epoch [199/200] Iter[101/196]	 Net1 loss: 3.52
+| Test Epoch #199	 Acc Net1: 59.28%, Acc Net2: 65.96% Acc Mean: 65.28%
+cifar100:noisy_label | Epoch [200/200] Iter[  1/196]	 Net1 loss: 4.05
+cifar100:noisy_label | Epoch [200/200] Iter[101/196]	 Net1 loss: 4.39
+| Test Epoch #200	 Acc Net1: 59.21%, Acc Net2: 65.96% Acc Mean: 65.24%
