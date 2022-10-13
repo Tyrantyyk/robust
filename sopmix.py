@@ -180,12 +180,12 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         logits_fmix = net(x_fmix)
         loss_fmix = fmix.loss(logits_fmix, (pseudo_label_c.detach()).long())
         # fmixup loss
-        # loss_cr = CEsoft(outputs_x2[idx_chosen], targets=pseudo_label_l[idx_chosen]).mean()
-        # # consistency loss
+        loss_cr = CEsoft(outputs_x2[idx_chosen], targets=pseudo_label_l[idx_chosen]).mean()
+        # consistency loss
         # loss_ce = CEsoft(outputs_x[idx_chosen], targets=pseudo_label_l[idx_chosen]).mean()
         # above: loss for reliable samples
 
-        loss_net1 = w * (loss_mix + loss_fmix)
+        loss_net1 = w * (loss_cr + loss_mix + loss_fmix)
         #  -------  loss for net1
         sop_loss = train_loss(index, outputs_x, outputs_x2, labels_x, d1_label)
         loss = loss_net1 + sop_loss
