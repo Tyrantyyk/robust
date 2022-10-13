@@ -356,7 +356,7 @@ for param_main, param_ema in zip(net1.parameters(), ema_net.parameters()):
     param_ema.data.copy_(param_main.data)  # initialize
     param_ema.requires_grad = False  # not update by gradient
 cudnn.benchmark = True
-train_loss = sop_trans_mat_loss(50000, args.num_class, 0, 0.1).cuda()
+train_loss = sop_trans_mat_loss(50000, args.num_class, 1, 0.1).cuda()
 # build optimizer, learning rate scheduler. delete every lines containing lr_scheduler for disabling scheduler
 reparam_params = [{'params': train_loss.u, 'lr': 1, 'weight_decay': 0},
                   {'params': train_loss.v, 'lr': 10, 'weight_decay': 0}]
@@ -404,6 +404,6 @@ for epoch in range(args.num_epochs + 1):
         scheduler.step()
 
     test(epoch, net1, ema_net)
-    torch.save(net1, f"./{args.dataset}_{args.noise_type}best.pth.tar")
+    torch.save(net1, f"../robut_respo_save/{args.dataset}_{args.noise_type}best.pth.tar")
     wandb.log({"time": time.time() - start})
     # regard the last ckpt as the best
