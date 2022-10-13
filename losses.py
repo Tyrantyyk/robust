@@ -7,7 +7,7 @@ import random
 
 class sop_trans_mat_loss(nn.Module):
     def __init__(self, num_examp, num_classes=10, Tr=0, ratio_balance=0):
-        super(sop_trans2_loss, self).__init__()
+        super(sop_trans_mat_loss, self).__init__()
         self.num_classes = num_classes
         self.USE_CUDA = torch.cuda.is_available()
         self.num_examp = num_examp

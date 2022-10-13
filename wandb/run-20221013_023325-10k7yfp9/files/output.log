@@ -1,0 +1,8 @@
+Namespace(T=0.5, alpha=4, batch_size=256, cosine=True, data_path='../data/cifar-100-python', dataset='cifar100', fmix=False, gpuid=0, id='', is_human=False, low_conf_del=False, lr=0.02, lr_decay_rate=0.1, noise_path='../data/cifar100N/CIFAR-100_human.pt', noise_type='noisy100', num_class=100, num_epochs=200, p_threshold=0.5, pretrain_ep=20, proto_m=0.9, rho_end=0.5, rho_range='0.5,0.5', rho_start=0.5, save_note='', seed=123, start_expand=150, tau=0.95, threshold=0.9, topk=4, unrel_pseudo='sharpen', use_unrel=False, warmup_ep=50)
+| Building net
+Traceback (most recent call last):
+  File "sopmix.py", line 359, in <module>
+    train_loss = sop_trans_mat_loss(50000, args.num_class, 0, 0.1).cuda()
+  File "/workspace/robust_respo/losses.py", line 10, in __init__
+    super(sop_trans2_loss, self).__init__()
+NameError: name 'sop_trans2_loss' is not defined
