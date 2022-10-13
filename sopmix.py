@@ -356,7 +356,7 @@ for param_main, param_ema in zip(net1.parameters(), ema_net.parameters()):
     param_ema.data.copy_(param_main.data)  # initialize
     param_ema.requires_grad = False  # not update by gradient
 cudnn.benchmark = True
-train_loss = sop_trans_mat_loss(50000, args.num_class, 1, 0.1).cuda()
+train_loss = sop_trans_mat_loss(50000, args.num_class, 0, 0.1).cuda()
 # build optimizer, learning rate scheduler. delete every lines containing lr_scheduler for disabling scheduler
 reparam_params = [{'params': train_loss.u, 'lr': 1, 'weight_decay': 0},
                   {'params': train_loss.v, 'lr': 10, 'weight_decay': 0}]
@@ -366,6 +366,7 @@ conf_penalty = NegEntropy()
 optimizer1 = optim.SGD([{'params': net1.parameters()}], lr=args.lr, momentum=0.9, weight_decay=5e-4)
 optimizer_overparametrization = optim.SGD(reparam_params)
 optimizer_trans = optim.SGD(trans_params)
+scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer1, args.num_epochs, eta_min=0.0002)
 
 fmix = FMix()
 CE = nn.CrossEntropyLoss(reduction='none')
@@ -400,6 +401,7 @@ for epoch in range(args.num_epochs + 1):
         # print('Train Net1')
         total_trainloader, noisy_labels = loader.run('train', pred1, prob1, prob2)  # co-divide
         train(epoch, net1, ema_net, optimizer1, total_trainloader)
+        scheduler.step()
 
     test(epoch, net1, ema_net)
     torch.save(net1, f"./{args.dataset}_{args.noise_type}best.pth.tar")
