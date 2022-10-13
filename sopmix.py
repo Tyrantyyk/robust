@@ -360,13 +360,14 @@ train_loss = sop_trans_mat_loss(50000, args.num_class, 1, 0.1).cuda()
 # build optimizer, learning rate scheduler. delete every lines containing lr_scheduler for disabling scheduler
 reparam_params = [{'params': train_loss.u, 'lr': 1, 'weight_decay': 0},
                   {'params': train_loss.v, 'lr': 10, 'weight_decay': 0}]
-trans_params = [{'params': train_loss.trans, 'lr':0.0001 , 'weight_decay': 0}]
+trans_params = [{'params': train_loss.trans, 'lr':0.001 , 'weight_decay': 0}]
 criterion = SemiLoss()
 conf_penalty = NegEntropy()
 optimizer1 = optim.SGD([{'params': net1.parameters()}], lr=args.lr, momentum=0.9, weight_decay=5e-4)
 optimizer_overparametrization = optim.SGD(reparam_params)
 optimizer_trans = optim.SGD(trans_params)
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer1, args.num_epochs, eta_min=0.0002)
+scheduler_trans = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer_trans, args.num_epochs, eta_min=0.000001)
 
 fmix = FMix()
 CE = nn.CrossEntropyLoss(reduction='none')
@@ -385,7 +386,7 @@ all_loss = [[], []]  # save the history of losses from two networks
 best_acc = 0
 start = time.time()
 for epoch in range(args.num_epochs + 1):
-    adjust_learning_rate(args, optimizer1, epoch)
+    # adjust_learning_rate(args, optimizer1, epoch)
 
     if epoch < warm_up:
         warmup_trainloader, noisy_labels = loader.run('warmup')
@@ -402,6 +403,7 @@ for epoch in range(args.num_epochs + 1):
         total_trainloader, noisy_labels = loader.run('train', pred1, prob1, prob2)  # co-divide
         train(epoch, net1, ema_net, optimizer1, total_trainloader)
         scheduler.step()
+        scheduler_trans.step()
 
     test(epoch, net1, ema_net)
     torch.save(net1, f"../robut_respo_save/{args.dataset}_{args.noise_type}best.pth.tar")
