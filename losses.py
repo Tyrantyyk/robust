@@ -143,7 +143,7 @@ class sop_trans_loss(nn.Module):
 
             loss += self.ratio_balance * balance_kl
 
-        return loss, prediction
+        return loss
 
 
     def soft_to_hard(self, x):

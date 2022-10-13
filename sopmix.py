@@ -138,7 +138,7 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         batch_size = inputs_x.size(0)
 
         # Transform label to one-hot
-        d1_label = labels_x
+        d1_label = labels_x.cuda()
         labels_x = torch.zeros(batch_size, args.num_class).scatter_(1, labels_x.view(-1, 1), 1)
         w_x = w_x.view(-1, 1).type(torch.FloatTensor)
         w_x2 = w_x2.view(-1, 1).type(torch.FloatTensor)
@@ -155,14 +155,20 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
             pred_net = F.one_hot(px.max(dim=1)[1], args.num_class).float()
 
             high_conf_cond = (labels_x * px).sum(dim=1) > args.tau
-            # high_conf_correct = px.max(dim=1) > args.tau
+            high_conf_correct = px.max(dim=1)[0] > args.tau
+
+            # correct
+            d1_label[high_conf_correct] = plabel[high_conf_correct]
+            labels_x = torch.zeros(batch_size, args.num_class).cuda().scatter_(1, d1_label.view(-1, 1), 1)
 
             w_x[high_conf_cond] = 1
+            w_x[high_conf_correct] = 1
             pseudo_label_l = labels_x * w_x + pred_net * (1 - w_x)
 
             # w_x[high_conf_correct] = 1
             # pseudo_label_l[high_conf_correct] = labels_x * w_x + pred_net * (1 - w_x)
             idx_chosen = torch.where(w_x == 1)[0]
+            idx_noise = (w_x != 1).squeeze(1)
             # selected examples
 
             if epoch < args.num_epochs - args.start_expand:
@@ -192,7 +198,8 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
 
         loss_net1 = w * (loss_cr + loss_mix + loss_fmix)
         #  -------  loss for net1
-        sop_loss = train_loss(index, outputs_x, outputs_x2, labels_x, d1_label)
+
+        sop_loss = train_loss(index[idx_noise], outputs_x[idx_noise], outputs_x2[idx_noise], labels_x[idx_noise,:], d1_label[idx_noise])
         loss = loss_net1 + sop_loss
 
         # compute gradient and do SGD step
