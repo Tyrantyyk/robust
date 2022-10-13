@@ -151,12 +151,17 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         with torch.no_grad():
             # label refinement of labeled samples
             px = torch.softmax(outputs_x, dim=1)
+            plabel = torch.argmax(px, dim=1)
             pred_net = F.one_hot(px.max(dim=1)[1], args.num_class).float()
 
             high_conf_cond = (labels_x * px).sum(dim=1) > args.tau
+            # high_conf_correct = px.max(dim=1) > args.tau
+
             w_x[high_conf_cond] = 1
             pseudo_label_l = labels_x * w_x + pred_net * (1 - w_x)
 
+            # w_x[high_conf_correct] = 1
+            # pseudo_label_l[high_conf_correct] = labels_x * w_x + pred_net * (1 - w_x)
             idx_chosen = torch.where(w_x == 1)[0]
             # selected examples
 
@@ -356,11 +361,11 @@ for param_main, param_ema in zip(net1.parameters(), ema_net.parameters()):
     param_ema.data.copy_(param_main.data)  # initialize
     param_ema.requires_grad = False  # not update by gradient
 cudnn.benchmark = True
-train_loss = sop_trans_mat_loss(50000, args.num_class, 1, 0.1).cuda()
+train_loss = sop_trans_loss(50000, args.num_class, 1, 0.1).cuda()
 # build optimizer, learning rate scheduler. delete every lines containing lr_scheduler for disabling scheduler
 reparam_params = [{'params': train_loss.u, 'lr': 1, 'weight_decay': 0},
                   {'params': train_loss.v, 'lr': 10, 'weight_decay': 0}]
-trans_params = [{'params': train_loss.trans, 'lr':0.001 , 'weight_decay': 0}]
+trans_params = [{'params': train_loss.trans, 'lr':0.00005 , 'weight_decay': 0}]
 criterion = SemiLoss()
 conf_penalty = NegEntropy()
 optimizer1 = optim.SGD([{'params': net1.parameters()}], lr=args.lr, momentum=0.9, weight_decay=5e-4)
@@ -403,7 +408,7 @@ for epoch in range(args.num_epochs + 1):
         total_trainloader, noisy_labels = loader.run('train', pred1, prob1, prob2)  # co-divide
         train(epoch, net1, ema_net, optimizer1, total_trainloader)
         scheduler.step()
-        scheduler_trans.step()
+        # scheduler_trans.step()
 
     test(epoch, net1, ema_net)
     torch.save(net1, f"../robut_respo_save/{args.dataset}_{args.noise_type}best.pth.tar")
