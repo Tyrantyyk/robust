@@ -30,6 +30,10 @@ parser.add_argument('--cosine', action='store_true', default=False,
 parser.add_argument('--noise_type', type=str, help='clean, aggre, worst, rand1, rand2, rand3, clean100, noisy100',
                     default='clean')
 parser.add_argument('--noise_path', type=str, help='path of CIFAR-10_human.pt', default=None)
+parser.add_argument('--tau_plus', default=0.1, type=float, help='Positive class priorx')
+parser.add_argument('--temperature', default=0.5, type=float, help='Temperature used in softmax')
+parser.add_argument('--estimator', default='hard', type=str, help='Choose loss function')
+parser.add_argument('--beta', default=1.0, type=float, help='Choose loss function')
 parser.add_argument('--p_threshold', default=0.5, type=float, help='clean probability threshold')
 parser.add_argument('--T', default=0.5, type=float, help='sharpening temperature')
 parser.add_argument('--num_epochs', default=150, type=int)
@@ -132,6 +136,7 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         batch_size = inputs_x.size(0)
 
         # Transform label to one-hot
+        loss_hard, loss_cr = 0, 0
         d1_label = labels_x.cuda()
         labels_x = torch.zeros(batch_size, args.num_class).scatter_(1, labels_x.view(-1, 1), 1)
         w_x = w_x.view(-1, 1).type(torch.FloatTensor)
@@ -139,7 +144,8 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
 
         index = index.cuda()
         inputs_x, inputs_x2, labels_x, w_x, w_x2 = inputs_x.cuda(), inputs_x2.cuda(), labels_x.cuda(), w_x.cuda(), w_x2.cuda()
-        outputs_x = net(inputs_x)
+        outputs_x, feat_x1 = net(inputs_x, train=True)
+        outputs_x2, feat_x2 = net(inputs_x2, train=True)
         outputs_a = ema_net(inputs_x)
 
         with torch.no_grad():
@@ -194,12 +200,13 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         x_fmix = fmix(X_w_c)
         logits_fmix = net(x_fmix)
         loss_fmix = fmix.loss(logits_fmix, (pseudo_label_c.detach()).long())
-        # fmixup loss
-        # loss_cr = CEsoft(outputs_x2[idx_chosen], targets=pseudo_label_l[idx_chosen]).mean()
-        # # consistency loss
-        # loss_ce = CEsoft(outputs_x[idx_chosen], targets=pseudo_label_l[idx_chosen]).mean()
-        # above: loss for reliable samples
-        loss_net1 = sop_loss + w * (loss_mix + loss_fmix)
+
+        if epoch > args.num_epochs - args.start_expand:
+            loss_cr = CEsoft(outputs_x2[idx_chosen], targets=pseudo_label_l[idx_chosen]).mean()
+            # consistency loss
+        else:
+            loss_hard = cl_hard_loss(feat_x1, feat_x2, args.tau_plus, batch_size, args.beta, args.estimator, args.temperature)
+        loss_net1 = sop_loss + w * (loss_cr + loss_mix + loss_fmix) + 0.1 * loss_hard
         #  -------  loss for net1
 
         loss = loss_net1
@@ -211,8 +218,7 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         optimizer.step()
         optimizer_overparametrization.step()
         optimizer_trans.step()
-
-        if batch_idx % ema_iteration == 0:
+        if epoch < 60:
             momentum_update_ema(net, ema_net, eman=True)
         wandb.log({"loss_net1": loss_net1})
 
@@ -221,14 +227,15 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
 def warmup(epoch, net, ema1, optimizer, dataloader):
     net.train()
     for batch_idx, (inputs_w, inputs_s, labels, index) in enumerate(dataloader):
-
-        inputs_w, labels = inputs_w.cuda(), labels.cuda()
+        batch_size = inputs_w.size(0)
+        inputs_w, inputs_s, labels = inputs_w.cuda(), inputs_s.cuda(), labels.cuda()
         optimizer.zero_grad()
-        outputs = net(inputs_w)
-
+        outputs, feat1 = net(inputs_w, train=True)
+        outputs2, feat2 = net(inputs_s, train=True)
         targets = torch.zeros(len(labels), args.num_class).cuda().scatter_(1, labels.view(-1, 1), 1)
-        loss, sop_pre = train_loss(index, outputs, 0, targets, labels)
-
+        L, sop_pre = train_loss(index, outputs, 0, targets, labels)
+        loss_hard = cl_hard_loss(feat1, feat2, args.tau_plus, batch_size, args.beta, args.estimator, args.temperature)
+        loss = L + 0.1 * loss_hard
         # compute gradient and do SGD step
         optimizer1.zero_grad()
         optimizer_overparametrization.zero_grad()
@@ -384,9 +391,6 @@ CEloss = nn.CrossEntropyLoss()
 CEsoft = CE_Soft_Label()
 
 ema_iteration = 1
-labeled_trainloader = None
-unlabeled_trainloader = None
-eval_loader = None
 idx2label = (torch.load(args.noise_path))[args.noise_type].reshape(-1)
 eval_loader, noise_or_not = loader.run('eval_train')
 test_loader = loader.run('test')
@@ -404,8 +408,6 @@ for epoch in range(args.num_epochs + 1):
         warmup(epoch, net1, ema_net, optimizer1, warmup_trainloader)
 
     else:
-        if epoch % 10 == 0:
-            ema_iteration += 1
         rho = args.rho_start + (args.rho_end - args.rho_start) * linear_rampup2(epoch, args.warmup_ep)
         prob1, all_loss[0] = eval_train(net1, all_loss[0], rho, args.num_class)
         prob2, all_loss[0] = eval_train(ema_net, all_loss[0], rho, args.num_class)
