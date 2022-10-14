@@ -17,11 +17,11 @@ from fmix import *
 import wandb
 import time
 
-wandb.init(project="Promix_based", entity="tyrantyyk")
+# wandb.init(project="Promix_based", entity="tyrantyyk")
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR Training')
 parser.add_argument('--batch_size', default=256, type=int, help='train batchsize')
-parser.add_argument('--lr', '--learning_rate', default=0.02, type=float, help='initial learning rate')
+parser.add_argument('--lr', '--learning_rate', default=0.05, type=float, help='initial learning rate')
 parser.add_argument('-lr_decay_rate', type=float, default=0.1,
                     help='decay rate for learning rate')
 parser.add_argument('--cosine', action='store_true', default=False,
@@ -165,8 +165,6 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
                 hc2_sel_wx1 = high_conf_sel2(idx_chosen, w_x, batch_size, score1, score2, match)
 
                 idx_chosen = torch.where(hc2_sel_wx1 == 1)[0]
-            else:
-                momentum_update_ema(net, ema_net, eman=True)
             # Label Guessing
 
         l = np.random.beta(4, 4)
@@ -202,7 +200,10 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         optimizer.step()
         optimizer_overparametrization.step()
         optimizer_trans.step()
-        wandb.log({"loss_net1": loss_net1})
+
+        if batch_idx % ema_iteration == 0:
+            momentum_update_ema(net, ema_net, eman=True)
+        # wandb.log({"loss_net1": loss_net1})
 
 
 
@@ -225,7 +226,7 @@ def warmup(epoch, net, ema1, optimizer, dataloader):
         optimizer_overparametrization.step()
         optimizer_trans.step()
         momentum_update_ema(net, ema1, eman=True)
-        wandb.log({"warmup loss": loss})
+        # wandb.log({"warmup loss": loss})
 
 
 def test(epoch, net1, net2):
@@ -258,11 +259,11 @@ def test(epoch, net1, net2):
     print("| Test Epoch #%d\t Acc Net1: %.2f%%, Acc Net2: %.2f%% Acc Mean: %.2f%%\n" % (epoch, acc, acc2, accmean))
     test_log.write('Epoch:%d   Accuracy:%.2f\n' % (epoch, acc))
     test_log.flush()
-    wandb.log({"test acc1": acc,
-               "test acc2": acc2,
-               "test acc_mean": accmean,
-               "epoch": epoch,
-               "lr": lr})
+    # wandb.log({"test acc1": acc,
+    #            "test acc2": acc2,
+    #            "test acc_mean": accmean,
+    #            "epoch": epoch,
+    #            "lr": lr})
 
 
 def eval_train(model, all_loss, rho, num_class):
@@ -371,6 +372,7 @@ CE = nn.CrossEntropyLoss(reduction='none')
 CEloss = nn.CrossEntropyLoss()
 CEsoft = CE_Soft_Label()
 
+ema_iteration = 1
 labeled_trainloader = None
 unlabeled_trainloader = None
 eval_loader = None
@@ -383,8 +385,7 @@ all_loss = [[], []]  # save the history of losses from two networks
 best_acc = 0
 start = time.time()
 for epoch in range(args.num_epochs + 1):
-    adjust_learning_rate(args, optimizer1, epoch)
-
+    # adjust_learning_rate(args, optimizer1, epoch)
     if epoch < warm_up:
         warmup_trainloader, noisy_labels = loader.run('warmup')
 
@@ -392,6 +393,8 @@ for epoch in range(args.num_epochs + 1):
         warmup(epoch, net1, ema_net, optimizer1, warmup_trainloader)
 
     else:
+        if epoch % 10 == 0:
+            ema_iteration += 1
         rho = args.rho_start + (args.rho_end - args.rho_start) * linear_rampup2(epoch, args.warmup_ep)
         prob1, all_loss[0] = eval_train(net1, all_loss[0], rho, args.num_class)
         prob2, all_loss[0] = eval_train(ema_net, all_loss[0], rho, args.num_class)
@@ -403,5 +406,5 @@ for epoch in range(args.num_epochs + 1):
 
     test(epoch, net1, ema_net)
     torch.save(net1, f"./{args.dataset}_{args.noise_type}best.pth.tar")
-    wandb.log({"time": time.time() - start})
+    # wandb.log({"time": time.time() - start})
     # regard the last ckpt as the best
