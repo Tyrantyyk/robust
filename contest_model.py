@@ -17,7 +17,7 @@ from fmix import *
 import wandb
 import time
 
-# wandb.init(project="Promix_based", entity="tyrantyyk")
+wandb.init(project="Promix_based", entity="tyrantyyk")
 
 parser = argparse.ArgumentParser(description='PyTorch CIFAR Training')
 parser.add_argument('--batch_size', default=256, type=int, help='train batchsize')
@@ -203,7 +203,7 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
 
         if batch_idx % ema_iteration == 0:
             momentum_update_ema(net, ema_net, eman=True)
-        # wandb.log({"loss_net1": loss_net1})
+        wandb.log({"loss_net1": loss_net1})
 
 
 
@@ -226,7 +226,7 @@ def warmup(epoch, net, ema1, optimizer, dataloader):
         optimizer_overparametrization.step()
         optimizer_trans.step()
         momentum_update_ema(net, ema1, eman=True)
-        # wandb.log({"warmup loss": loss})
+        wandb.log({"warmup loss": loss})
 
 
 def test(epoch, net1, net2):
@@ -259,11 +259,11 @@ def test(epoch, net1, net2):
     print("| Test Epoch #%d\t Acc Net1: %.2f%%, Acc Net2: %.2f%% Acc Mean: %.2f%%\n" % (epoch, acc, acc2, accmean))
     test_log.write('Epoch:%d   Accuracy:%.2f\n' % (epoch, acc))
     test_log.flush()
-    # wandb.log({"test acc1": acc,
-    #            "test acc2": acc2,
-    #            "test acc_mean": accmean,
-    #            "epoch": epoch,
-    #            "lr": lr})
+    wandb.log({"test acc1": acc,
+               "test acc2": acc2,
+               "test acc_mean": accmean,
+               "epoch": epoch,
+               "lr": lr})
 
 
 def eval_train(model, all_loss, rho, num_class):
@@ -406,5 +406,5 @@ for epoch in range(args.num_epochs + 1):
 
     test(epoch, net1, ema_net)
     torch.save(net1, f"./{args.dataset}_{args.noise_type}best.pth.tar")
-    # wandb.log({"time": time.time() - start})
+    wandb.log({"time": time.time() - start})
     # regard the last ckpt as the best
