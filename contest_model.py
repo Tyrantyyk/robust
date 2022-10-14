@@ -14,6 +14,7 @@ from sklearn.mixture import GaussianMixture
 import dataloader_cifarn as dataloader
 from utils import *
 from fmix import *
+from losses import *
 import wandb
 import time
 
@@ -131,7 +132,7 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         batch_size = inputs_x.size(0)
 
         # Transform label to one-hot
-        d1_label = labels_x
+        d1_label = labels_x.cuda()
         labels_x = torch.zeros(batch_size, args.num_class).scatter_(1, labels_x.view(-1, 1), 1)
         w_x = w_x.view(-1, 1).type(torch.FloatTensor)
         w_x2 = w_x2.view(-1, 1).type(torch.FloatTensor)
@@ -145,13 +146,29 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
             # label refinement of labeled samples
             px = torch.softmax(outputs_x, dim=1)
             px2 = torch.softmax(outputs_a, dim=1)
+            plabel = torch.argmax(px, dim=1)
             pred_net = F.one_hot(px.max(dim=1)[1], args.num_class).float()
+            ema_pre = F.one_hot(px2.max(dim=1)[1], args.num_class).float()
 
             high_conf_cond = (labels_x * px).sum(dim=1) > args.tau
             high_conf_cond2 = (labels_x * px2).sum(dim=1) > args.tau
+            high_conf_correct = px.max(dim=1)[0] > args.tau
+
+            # correct
+            d1_label[high_conf_correct] = plabel[high_conf_correct]
+            labels_x = torch.zeros(batch_size, args.num_class).cuda().scatter_(1, d1_label.view(-1, 1), 1)
+
             w_x[high_conf_cond] = 1
+            w_x[high_conf_correct] = 1
             w_x2[high_conf_cond2] = 1
-            pseudo_label_l = labels_x * w_x + pred_net * (1 - w_x)
+
+            sop_loss, sop_pre = train_loss(index, outputs_x, 0, labels_x, d1_label)
+            sop_pre = F.one_hot(sop_pre.max(dim=1)[1], args.num_class).float()
+            # sop consistency
+            match = px.max(dim=1)[1] == sop_pre.max(dim=1)[1]
+            sop_pre[~match, :] = 0
+
+            pseudo_label_l = sop_pre * (1-w_x) * 0.2 + pred_net * (1-w_x) * 0.4 + ema_pre * (1-w_x) * 0.4 + labels_x * w_x
 
             idx_chosen = torch.where(w_x == 1)[0]
             # selected examples
@@ -187,7 +204,6 @@ def train(epoch, net, ema_net, optimizer, labeled_trainloader):
         # # consistency loss
         # loss_ce = CEsoft(outputs_x[idx_chosen], targets=pseudo_label_l[idx_chosen]).mean()
         # above: loss for reliable samples
-        sop_loss = train_loss(index, outputs_x, labels_x, d1_label)
         loss_net1 = sop_loss + w * (loss_mix + loss_fmix)
         #  -------  loss for net1
 
@@ -216,7 +232,7 @@ def warmup(epoch, net, ema1, optimizer, dataloader):
         outputs = net(inputs_w)
 
         targets = torch.zeros(len(labels), args.num_class).cuda().scatter_(1, labels.view(-1, 1), 1)
-        loss = train_loss(index, outputs, targets, labels)
+        loss, sop_pre = train_loss(index, outputs, 0, targets, labels)
 
         # compute gradient and do SGD step
         optimizer1.zero_grad()
